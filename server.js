@@ -12,6 +12,7 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
+
 // JWT Authentication Middleware
 function requireAuth(req, res, next) {
     const authHeader = req.headers.authorization;
@@ -56,6 +57,15 @@ async function testConnection() {
 }
 
 testConnection();
+
+app.get("/api/health", (req, res) => {
+    res.json({
+        status: "online",
+        deployed: true,
+        timestamp: new Date().toISOString()
+    });
+});
+
 
 // Health check endpoint
 app.get('/health', (req, res) => {
