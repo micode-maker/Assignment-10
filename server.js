@@ -5,10 +5,12 @@ const { db, User, Task } = require('./database/setup');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const cors = require('cors');
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // JWT Authentication Middleware
 function requireAuth(req, res, next) {
